@@ -1,6 +1,6 @@
 # code-dojo
 -------------------------------------------------------------------------------------
-heck in here:
+check in here:
 Nov 18 2 hours - just practicing learned topics
 
 
