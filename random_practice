@@ -1,0 +1,43 @@
+users = {"ivan": "1234", "petr": "qwerty", "anna": "lol"}
+
+successful = 0
+false = 0
+login_exist = 0
+login = input("login:")
+password = input("password:")
+
+for key, value in users.items():
+    if key == login:
+        login_exist = 1
+        if value == password:
+            successful  = 1
+    else:
+        false = 1
+
+if successful == 1:
+    print("True")
+elif login_exist == 1:
+    print("incorrect password")
+elif false == 1:
+    print("False")
+
+
+def max_of_three(a, b, c):
+    list = [a , b, c]
+    max = a
+    for i in list:
+        if i > max:
+            max = i
+    print(max)
+
+max_of_three(1,2,0.5)
+
+def square_all(list):
+    new_list = []
+    square = 0
+    for i in list:
+        square = i ** 2
+        new_list.append(square)
+    print(new_list)
+
+square_all([1,2,3,4,5,6])
