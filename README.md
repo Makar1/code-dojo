@@ -1,4 +1,10 @@
 # code-dojo
+-------------------------------------------------------------------------------------
+heck in here:
+Nov 18 2 hours - just practicing learned topics
+
+
+-------------------------------------------------------------------------------------
 practice 
 
 I want to try making a translator from deepl API
