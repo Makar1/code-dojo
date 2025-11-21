@@ -1,0 +1,56 @@
+"""
+List Comprehension Practice
+
+"""
+
+print("=== BASIC COMPREHENSIONS ===")
+
+# 1. Squares of numbers
+squares = [i**2 for i in range(1,11)]
+print("1. Squares:", squares)
+
+# 2. String lengths
+words = ["hello", "world", "python", "code"]
+lengths = [len(i) for i in words]
+print("2. String lengths:", lengths)
+
+# 3. Even numbers
+evens = [i for i in range(20) if i % 2 == 0]
+print("3. Even numbers:", evens)
+
+print("\n=== CONDITIONAL COMPREHENSIONS ===")
+
+# 4. Squares of even numbers
+even_squares = [i**2 for i in range(1,21) if i % 2 == 0]
+print("4. Squares of evens:", even_squares)
+
+# 5. Capitalized words
+mixed_words = ["Apple", "banana", "Cherry", "date", "Elderberry", "fig"]
+titles = [i for i in mixed_words if not i.islower()]
+print("5. Capitalized words:", titles)
+
+# 6. Even→square, odd→cube
+powered = [i**2 if i % 2 == 0 else i**3 for i in range(1,11)]
+print("6. Squares/Cubes:", powered)
+
+print("\n=== MATHEMATICAL ===")
+
+# 7. Sine values
+import math
+sines = [math.sin(i) for i in range(0,361,30)]
+print("7. Sines:", sines[:3], "...")
+
+print("\n=== NESTED STRUCTURES ===")
+
+# 8. Flatten matrix
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flattened = [y for i in matrix for y in i]
+print("8. Flattened matrix:", flattened)
+
+# 9. Cartesian product
+list_x = [1, 2, 3]
+list_y = ['a', 'b', 'c']
+pairs = [(x,y) for x in list_x for y in list_y]
+print("9. Pairs (x,y):", pairs)
+
+print("\n=== ALL TASKS COMPLETED ===")
