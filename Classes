@@ -1,0 +1,17 @@
+class Ork:
+    def __init__(self,level: int) -> None:
+        self.level = level
+        self.health_points = 100 * level
+        self.attack_power = 100
+
+    def attack(self):
+        print(f"Ork attacks with {self.attack_power} power")
+
+    def __str__(self):
+        return f"Ork (level: {self.level}), hp: {self.health_points}"
+
+ork_Bob = Ork(level=1)
+print(ork_Bob.level)
+print(ork_Bob.attack)
+print(ork_Bob)
+ork_Bob.attack()
