@@ -1,17 +1,43 @@
-class Ork:
-    def __init__(self,level: int) -> None:
-        self.level = level
-        self.health_points = 100 * level
-        self.attack_power = 100
+class Character:
+    def __init__(self,*,level: int) -> None:
+      self.level = level
+      self.heaths_points = self.base_health_points * level
+      self.attack_power = self.base_attack_power * level
 
-    def attack(self):
-        print(f"Ork attacks with {self.attack_power} power")
+    def attack(self, *,target: "Character"):
+        print(f"{self.character_name} attacks  {target.character_name} |"
+              f"({target.heaths_points} healths points  with {self.attack_power} power)")
+        target.heaths_points -= self.attack_power
+        print(f"After attack {target.character_name} hp has {target.heaths_points}")
 
-    def __str__(self):
-        return f"Ork (level: {self.level}), hp: {self.health_points}"
+    def is_alife(self) -> bool:
+        return self.heaths_points > 0
 
-ork_Bob = Ork(level=1)
-print(ork_Bob.level)
-print(ork_Bob.attack)
-print(ork_Bob)
-ork_Bob.attack()
+    def __str__(self) -> str:
+        return f"{self.character_name}, hp: {self.heaths_points}"
+
+
+class Ork(Character):
+    base_health_points = 100
+    base_attack_power = 10
+    character_name = "Ork"
+
+class Elf(Character):
+    base_health_points = 50
+    base_attack_power = 25
+    character_name = "Elf"
+
+def fight(*, character_1: Character, character_2: Character) -> None:
+    while character_1.is_alife() and character_2.is_alife():
+        character_1.attack(target=character_2)
+        if character_2.is_alife:
+            character_2.attack(target=character_1)
+
+    print(f"Character_1: {character_1}")
+    print(f"Character_2: {character_2}")
+
+
+
+ork = Ork(level=20)
+elf = Elf(level=16)
+fight(character_1=elf,character_2=ork)
