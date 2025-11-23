@@ -4,11 +4,16 @@ class Character:
       self.health_points = self.base_health_points * level
       self.attack_power = self.base_attack_power * level
 
+    def is_perk(self,*,target: "Character"):
+        self.perk(target=target)
+
     def attack(self, *,target: "Character"):
         print(f"{self.character_name} attacks  {target.character_name} |"
               f"({target.health_points} healths points  with {self.attack_power} power)")
+
         target.health_points -= self.attack_power
         print(f"After attack {target.character_name} hp has {target.health_points}")
+
 
     def is_alive(self) -> bool:
         return self.health_points > 0
@@ -20,22 +25,44 @@ class Character:
 class Ork(Character):
     base_health_points = 100
     base_attack_power = 10
+    base_defence = 10
     character_name = "Ork"
+
+    def perk(self, *, target=None):
+        if self.health_points < 50:
+            self.health_points += 25
+            print("it works: +25hp")
 
 class Elf(Character):
     base_health_points = 50
-    base_attack_power = 25
+    base_attack_power = 15
+    base_defence = 10
     character_name = "Elf"
+
+    def perk(self, *,target: "Character"):
+        health_point_in_the_beginning = target.base_health_points * target.level
+        if (target.health_points / health_point_in_the_beginning * 100) <= 30:
+            self.attack_power *= 2
+            print(f"it works too: {self.attack_power} power")
+
 
 def fight(*, character_1: Character, character_2: Character) -> None:
     while character_1.is_alive() and character_2.is_alive():
+        character_1.is_perk(target=character_2)
         character_1.attack(target=character_2)
+
         if character_2.is_alive():
+            character_2.is_perk(target=character_1)
             character_2.attack(target=character_1)
 
     print(f"Character_1: {character_1}")
     print(f"Character_2: {character_2}")
 
+
+
+ork = Ork(level=1)
+elf = Elf(level=2)
+fight(character_1=elf,character_2=ork)
 
 
 ork = Ork(level=20)
