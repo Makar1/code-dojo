@@ -1,70 +1,77 @@
 class Character:
-    def __init__(self,*,level: int) -> None:
-      self.level = level
-      self.health_points = self.base_health_points * level
-      self.attack_power = self.base_attack_power * level
+    def __init__(self, *, level: int) -> None:
+        self.level = level
+        self.health_points = self.base_health_points * level
+        self.attack_power = self.base_attack_power * level
 
-    def is_perk(self,*,target: "Character"):
-        self.perk(target=target)
+    def __str__(self) -> str:
+        return f"{self.character_name} (level: {self.level}, hp: {self.health_points})"
 
-    def attack(self, *,target: "Character"):
-        print(f"{self.character_name} attacks  {target.character_name} |"
-              f"({target.health_points} healths points  with {self.attack_power} power)")
+    def attack(self, *, target: "Character") -> None:
+        target.got_damage(damage=self.attack_power)
 
-        target.health_points -= self.attack_power
-        print(f"After attack {target.character_name} hp has {target.health_points}")
-
+    def got_damage(self, *,damage: int) -> None:
+        damage = damage * (100 - self.defence) / 100
+        damage = round(damage)
+        self.health_points -= damage
 
     def is_alive(self) -> bool:
         return self.health_points > 0
 
-    def __str__(self) -> str:
-        return f"{self.character_name}, hp: {self.health_points}"
+
+    @property
+    def max_health_points(self) -> int:
+        return self.base_health_points * self.level
+
+
+    def health_points_percent(self) -> int:
+        return self.health_points / self.max_health_points * 100
+
+    @property
+    def defence(self) -> int:
+        defence = self.base_defence * self.level
+        if self.health_points < 50:
+            defence *= 3
+
+        return  defence
 
 
 class Ork(Character):
+    character_name = "Ork"
     base_health_points = 100
     base_attack_power = 10
-    base_defence = 10
-    character_name = "Ork"
+    base_defence = 15
 
-    def perk(self, *, target=None):
-        if self.health_points < 50:
-            self.health_points += 25
-            print("it works: +25hp")
+    @property
+    def defence(self) -> int:
+        defence = super().defence
+        return defence
+
 
 class Elf(Character):
-    base_health_points = 50
+    character_name = "Elf"
+    base_health_points = 70
     base_attack_power = 15
     base_defence = 10
-    character_name = "Elf"
 
-    def perk(self, *,target: "Character"):
-        health_point_in_the_beginning = target.base_health_points * target.level
-        if (target.health_points / health_point_in_the_beginning * 100) <= 30:
-            self.attack_power *= 2
-            print(f"it works too: {self.attack_power} power")
+    def attack(self, *, target: "Character") -> None:
+        attack_power = self.attack_power
+        if target.health_points_percent() < 30:
+            attack_power = self.attack_power * 3
+        target.got_damage(damage=attack_power)
 
 
 def fight(*, character_1: Character, character_2: Character) -> None:
     while character_1.is_alive() and character_2.is_alive():
-        character_1.is_perk(target=character_2)
         character_1.attack(target=character_2)
-
         if character_2.is_alive():
-            character_2.is_perk(target=character_1)
             character_2.attack(target=character_1)
 
-    print(f"Character_1: {character_1}")
-    print(f"Character_2: {character_2}")
+    print(f"Character 1: {character_1}, is alive: {character_1.is_alive()}")
+    print(f"Character 2: {character_2}, is alive: {character_2.is_alive()}")
 
+ork_1 = Ork(level=1)
+elf_1 = Elf(level=1)
 
+fight(character_1=elf_1, character_2=ork_1)
 
-ork = Ork(level=1)
-elf = Elf(level=2)
-fight(character_1=elf,character_2=ork)
-
-
-ork = Ork(level=20)
-elf = Elf(level=16)
-fight(character_1=elf,character_2=ork)
