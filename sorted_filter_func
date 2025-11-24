@@ -1,0 +1,11 @@
+# Task
+# Filter only paid orders (status == "paid").
+# Sort them by amount in descending order.
+# Get the list of IDs of these orders.
+
+
+dict_paid = [order for order in orders if order["status"] == "paid"]
+sorted_dict = sorted(dict_paid, key= lambda  order: order["amount"], reverse=True)
+
+for order in sorted_dict:
+    print(order["id"])
