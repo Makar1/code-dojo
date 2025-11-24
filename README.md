@@ -4,6 +4,8 @@ check in here:
 Nov 18 2 hours - just practicing learned topics
 Nov 21 3 hours - list comprehension and set
 Nov 22 2 hours - introduction to classes 
+Nov 23 5.5 hours - classes
+Nov 24 
 
 
 -------------------------------------------------------------------------------------
