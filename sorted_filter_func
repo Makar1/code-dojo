@@ -1,11 +1,40 @@
+orders = [
+    {"id": 101, "amount": 1200, "status": "paid"},
+    {"id": 102, "amount": 300, "status": "canceled"},
+    {"id": 103, "amount": 980, "status": "paid"},
+    {"id": 104, "amount": 150, "status": "pending"},
+    {"id": 105, "amount": 2200, "status": "paid"},
+]
+
 # Task
 # Filter only paid orders (status == "paid").
 # Sort them by amount in descending order.
 # Get the list of IDs of these orders.
 
 
-dict_paid = [order for order in orders if order["status"] == "paid"]
-sorted_dict = sorted(dict_paid, key= lambda  order: order["amount"], reverse=True)
+paid_orders = [order for order in orders if order["status"] == "paid"]
+sorted_dict = sorted(paid_orders, key= lambda  order: order["amount"], reverse=True)
 
 for order in sorted_dict:
     print(order["id"])
+
+----------------------------------------------------------------------------------------
+
+users = [
+    {"name": "Alice", "active": True, "last_login": 12},
+    {"name": "Bob", "active": False, "last_login": 90},
+    {"name": "Charlie", "active": True, "last_login": 5},
+    {"name": "Diana", "active": True, "last_login": 40},
+]
+
+# Task
+# Keep only active users.
+# Sort them by last_login (less = logged in recently).
+# Transform the list into the format:
+# ["Alice (12 days)", "Charlie (5 days)", ...]
+
+
+active_users = [user for user in users if user["active"]]
+sorted_users = sorted(active_users, key= lambda user :user["last_login"])
+for user in sorted_users:
+    print(f'{user["name"]} ({user["last_login"]} days)')
