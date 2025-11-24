@@ -1,0 +1,21 @@
+def find_average(*, numbers: list) -> float:
+    return  sum(numbers) / len(numbers)
+
+try:
+    print(find_average(numbers=[1,2,3,4,5]))
+except ZeroDivisionError:
+    print("The list is empty")
+
+print("we are here")
+
+----------------------------------------------------------------------------------
+
+import requests
+try:
+    response = requests.get('https://api.binance.com/api/v3/ticker/price', params={'symbol': 'BTCUSDT'})
+    content = response.content
+    price_object = response.json()
+    price = float(price_object['price'])
+    print(price)
+except requests.exceptions.ConnectionError as error:
+    print(f"Something went wrong: {error}")
