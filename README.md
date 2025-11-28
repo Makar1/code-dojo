@@ -7,8 +7,9 @@ Nov 22 2 hours - introduction to classes
 Nov 23 5.5 hours - classes
 Nov 24 3 hours - sort lambda, comprehensions, try except practice
 Nov 25 2 hours - decorators 
-Nov 26 1.5 hours introdduction to tg bots
-Nov 27 - introdduction to tg bots
+Nov 26 1.5 hours - introdduction to tg bots
+Nov 27 3.5 hours - introdduction to tg bots
+Nov 28 4 hours - libr socket and create tool "MyCurl"
 -------------------------------------------------------------------------------------
 practice 
 
